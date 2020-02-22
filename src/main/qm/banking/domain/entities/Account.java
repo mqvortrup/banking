@@ -2,7 +2,6 @@ package qm.banking.domain.entities;
 
 public abstract class Account {
 
-
     private final String IBAN;
     private int balance;
 
@@ -17,4 +16,14 @@ public abstract class Account {
 
     public int getBalance() {
         return balance;
-    }}
+    }
+
+    public void credit(int amount) {
+        if (amount > balance) throw new InsufficientFundsException(IBAN);
+        balance -= amount;
+    }
+
+    public void debit(int amount) {
+        balance += amount;
+    }
+}

@@ -1,6 +1,8 @@
 package qm.banking.domain.singlepayments.implementation;
 
 import qm.banking.domain.entities.Account;
+import qm.banking.domain.entities.Ledger;
+import qm.banking.domain.entities.LedgerEntry;
 import qm.banking.domain.singlepayments.api.Balance;
 import qm.banking.domain.singlepayments.api.ExternalAccount;
 import qm.banking.domain.singlepayments.api.InternalAccount;
@@ -16,8 +18,13 @@ public class SinglePaymentsImplementation implements SinglePayments {
     }
 
     @Override
-    public void internalTransfer(InternalAccount from, InternalAccount to, int amount) {
-
+    public void internalTransfer(InternalAccount fromDef, InternalAccount toDef, int amount) {
+        Account from = accountAccess.retrieveAccount(fromDef);
+        Account to = accountAccess.retrieveAccount(toDef);
+        from.credit(amount);
+        to.debit(amount);
+        Ledger ledger = accountAccess.retrieveLedger();
+        ledger.addEntry(new LedgerEntry(amount, fromDef, toDef));
     }
 
     @Override
