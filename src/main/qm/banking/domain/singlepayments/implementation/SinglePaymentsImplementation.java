@@ -29,7 +29,7 @@ public class SinglePaymentsImplementation implements SinglePayments {
 
     @Override
     public void externalTransfer(InternalAccount from, ExternalAccount to, int amount) {
-
+        throw new IllegalStateException("not implemented");
     }
 
     @Override
