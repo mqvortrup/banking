@@ -22,11 +22,17 @@ internal class JournalTest {
 
     @Test
     fun credit() {
-        TODO()
+        journal.credit(AMOUNT, "")
+        Assertions.assertEquals(AMOUNT, journal.currentBalance.amount, "Balance after credit must be $AMOUNT")
     }
 
     @Test
     fun debit() {
-        TODO()
+        journal.debit(AMOUNT, "")
+        Assertions.assertEquals(-AMOUNT, journal.currentBalance.amount, "Balance after credit must be -$AMOUNT")
+    }
+
+    companion object {
+        const val AMOUNT = 500
     }
 }
