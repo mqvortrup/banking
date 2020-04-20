@@ -1,14 +1,19 @@
 package qm.banking.domain.entities
 
-abstract class Account(val iBAN: String, var balance: Int) {
+abstract class Account(val iban: IBAN) {
 
-    fun credit(amount: Int) {
-        if (amount > balance) throw InsufficientFundsException(iBAN)
+    var balance = 0
+        private set
+
+    fun debit(amount: Int): Account {
+        if (amount > balance) throw InsufficientFundsException(iban)
         balance -= amount
+        return this
     }
 
-    fun debit(amount: Int) {
+    fun credit(amount: Int): Account {
         balance += amount
+        return this
     }
 
 }

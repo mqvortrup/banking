@@ -8,8 +8,12 @@ class SinglePaymentsImplementation(private val accountAccess: AccountAccess) : S
     override fun internalTransfer(from: InternalAccount, to: InternalAccount, amount: Int) {
         val fromAccount = accountAccess.retrieveAccount(from)
         val toAccount = accountAccess.retrieveAccount(to)
-        fromAccount.credit(amount)
-        toAccount.debit(amount)
+        fromAccount.debit(amount)
+        toAccount.credit(amount)
+        val fromJournal = accountAccess.retrieveJournal(from)
+        val toJournal = accountAccess.retrieveJournal(to)
+        fromJournal.debit(amount, "")
+        toJournal.credit(amount, "")
         val ledger = accountAccess.retrieveLedger()
         ledger.addEntry(LedgerEntry(amount, from, to))
     }

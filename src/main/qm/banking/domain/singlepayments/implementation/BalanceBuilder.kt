@@ -6,6 +6,6 @@ import java.time.LocalDateTime
 
 object BalanceBuilder {
     fun balance(account: Account): Balance {
-        return Balance(account.iBAN, LocalDateTime.now(), account.balance)
+        return Balance(account.iban, LocalDateTime.now(), account.balance)
     }
 }

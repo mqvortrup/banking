@@ -3,10 +3,7 @@ package qm.banking.domain.singlepayments.implementation
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import qm.banking.domain.entities.Account
-import qm.banking.domain.entities.InsufficientFundsException
-import qm.banking.domain.entities.Ledger
-import qm.banking.domain.entities.SavingsAccount
+import qm.banking.domain.entities.*
 import qm.banking.domain.singlepayments.api.*
 import java.util.*
 
@@ -26,8 +23,8 @@ internal class SinglePaymentsImplementationTest {
         val to = InternalAccount(IBAN_to)
         singlePayments.internalTransfer(from, to, 500)
         Assertions.assertEquals(500, singlePayments.currentBalance(InternalAccount(IBAN_from)).amount)
-        Assertions.assertEquals(500, singlePayments.currentBalance(InternalAccount(IBAN_to)).amount
-        )
+        Assertions.assertEquals(500, singlePayments.currentBalance(InternalAccount(IBAN_to)).amount)
+        println("bla bla")
     }
 
     @Test
@@ -43,13 +40,11 @@ internal class SinglePaymentsImplementationTest {
         val to = ExternalAccount(IBAN_to_E)
         singlePayments.externalTransfer(from, to, 500)
         Assertions.assertEquals(500, singlePayments.currentBalance(InternalAccount(IBAN_from)).amount)
-        Assertions.assertEquals(500, singlePayments.currentBalance(InternalAccount(IBAN_to)).amount
-        )
     }
 
     @Test
     private fun unknownAccount() {
-        Assertions.assertThrows(NoSuchAccount::class.java) { singlePayments.currentBalance(InternalAccount("CH-no-such-acc"))}
+        Assertions.assertThrows(NoSuchAccount::class.java) { singlePayments.currentBalance(InternalAccount(IBAN("CH-no-such-acc")))}
     }
 
     @Test
@@ -59,26 +54,31 @@ internal class SinglePaymentsImplementationTest {
     }
 
     internal inner class MockAccountAccess : AccountAccess {
-        var accounts: MutableMap<String, Account> = HashMap()
+        var accounts: MutableMap<IBAN, Account> = HashMap()
+        var journals: MutableMap<IBAN, Journal> = HashMap()
         var ledger = Ledger()
-        override fun retrieveAccount(accountDef: InternalAccount): Account {
-            return accounts[accountDef.IBAN] ?: throw NoSuchAccount(accountDef)
+        override fun retrieveAccount(account: InternalAccount): Account {
+            return accounts[account.iban] ?: throw NoSuchAccount(account)
         }
 
         override fun retrieveLedger(): Ledger {
             return ledger
         }
 
+        override fun retrieveJournal(account: InternalAccount): Journal {
+            return journals[account.iban] ?: throw NoSuchAccount(account)
+        }
+
         init {
-            accounts[IBAN_from] = SavingsAccount(IBAN_from, BALANCE)
-            accounts[IBAN_to] = SavingsAccount(IBAN_from, 0)
+            accounts[IBAN_from] = SavingsAccount(IBAN_from).credit(BALANCE)
+            accounts[IBAN_to] = SavingsAccount(IBAN_from)
         }
     }
 
     companion object {
         const val BALANCE = 1000
-        const val IBAN_from = "CH-102030"
-        const val IBAN_to = "CH-102035"
-        const val IBAN_to_E = "CH-202035"
+        val IBAN_from = IBAN("CH-102030")
+        val IBAN_to = IBAN("CH-102035")
+        val IBAN_to_E = IBAN("CH-202035")
     }
 }

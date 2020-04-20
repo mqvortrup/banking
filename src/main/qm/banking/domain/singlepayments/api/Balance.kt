@@ -1,5 +1,6 @@
 package qm.banking.domain.singlepayments.api
 
+import qm.banking.domain.entities.IBAN
 import java.time.LocalDateTime
 
-class Balance(val IBAN: String?, val date: LocalDateTime, val amount: Int)
+data class Balance(val iban: IBAN, val date: LocalDateTime, val amount: Int)

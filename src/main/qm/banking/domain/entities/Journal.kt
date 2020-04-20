@@ -6,7 +6,7 @@ class Journal {
 
     private var _entries : MutableList<Entry> = mutableListOf(Balance(0, LocalDate.now(), "Initial balance"))
     val entries : List<Entry>
-        get() = _entries as List<Entry>
+        get() = _entries
 
     var currentBalance : Balance = entries[0] as Balance
         private set

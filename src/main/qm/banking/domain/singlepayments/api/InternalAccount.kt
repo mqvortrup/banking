@@ -1,5 +1,7 @@
 package qm.banking.domain.singlepayments.api
 
-class InternalAccount(val IBAN: String) {
-    override fun toString() : String = "IBAN: $IBAN"
+import qm.banking.domain.entities.IBAN
+
+class InternalAccount(val iban: IBAN) {
+    override fun toString() : String = "IBAN: $iban"
 }
