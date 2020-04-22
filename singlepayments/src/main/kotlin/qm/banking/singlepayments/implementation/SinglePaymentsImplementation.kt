@@ -1,7 +1,7 @@
-package qm.banking.domain.singlepayments.implementation
+package qm.banking.singlepayments.implementation
 
 import qm.banking.domain.entities.LedgerEntry
-import qm.banking.domain.singlepayments.api.*
+import qm.banking.singlepayments.api.*
 
 class SinglePaymentsImplementation(private val accountAccess: AccountAccess) : SinglePayments {
 

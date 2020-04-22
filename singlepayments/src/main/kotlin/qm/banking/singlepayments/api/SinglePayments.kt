@@ -1,4 +1,4 @@
-package qm.banking.domain.singlepayments.api
+package qm.banking.singlepayments.api
 
 interface SinglePayments {
     fun internalTransfer(from: InternalAccount, to: InternalAccount, amount: Int)

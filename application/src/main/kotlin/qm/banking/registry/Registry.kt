@@ -1,7 +1,7 @@
-package qm.banking.domain.registry
+package qm.banking.registry
 
-import qm.banking.domain.singlepayments.api.AccountAccess
-import qm.banking.domain.singlepayments.api.SinglePayments
+import qm.banking.singlepayments.api.AccountAccess
+import qm.banking.singlepayments.api.SinglePayments
 
 class Registry private constructor() {
     var theAccountAccess: AccountAccess? = null
