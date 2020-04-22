@@ -3,10 +3,7 @@ package qm.banking.singlepayments.implementation
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import qm.banking.domain.entities.Account
-import qm.banking.domain.entities.InsufficientFundsException
-import qm.banking.domain.entities.Ledger
-import qm.banking.domain.entities.SavingsAccount
+import qm.banking.domain.entities.*
 import qm.banking.singlepayments.api.*
 import java.util.*
 

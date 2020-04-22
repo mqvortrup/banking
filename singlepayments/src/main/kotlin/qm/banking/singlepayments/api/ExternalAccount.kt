@@ -1,3 +1,5 @@
 package qm.banking.singlepayments.api
 
-class ExternalAccount(val IBAN: String)
+import qm.banking.domain.entities.IBAN
+
+class ExternalAccount(val iban: IBAN)

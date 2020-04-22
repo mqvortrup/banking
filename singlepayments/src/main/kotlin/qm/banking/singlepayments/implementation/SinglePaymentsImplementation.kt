@@ -15,7 +15,7 @@ class SinglePaymentsImplementation(private val accountAccess: AccountAccess) : S
         fromJournal.debit(amount, "")
         toJournal.credit(amount, "")
         val ledger = accountAccess.retrieveLedger()
-        ledger.addEntry(LedgerEntry(amount, from, to))
+        ledger.addEntry(LedgerEntry(amount, from.iban, to.iban))
     }
 
     override fun externalTransfer(from: InternalAccount, to: ExternalAccount, amount: Int) {
