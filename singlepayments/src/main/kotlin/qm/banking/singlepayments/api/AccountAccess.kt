@@ -1,4 +1,4 @@
-package qm.banking.domain.singlepayments.api
+package qm.banking.singlepayments.api
 
 import qm.banking.domain.entities.Account
 import qm.banking.domain.entities.Journal

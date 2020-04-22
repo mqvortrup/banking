@@ -1,7 +1,7 @@
-package qm.banking.domain.singlepayments.implementation
+package qm.banking.singlepayments.implementation
 
 import qm.banking.domain.entities.LedgerEntry
-import qm.banking.domain.singlepayments.api.*
+import qm.banking.singlepayments.api.*
 
 class SinglePaymentsImplementation(private val accountAccess: AccountAccess) : SinglePayments {
 
@@ -15,7 +15,7 @@ class SinglePaymentsImplementation(private val accountAccess: AccountAccess) : S
         fromJournal.debit(amount, "")
         toJournal.credit(amount, "")
         val ledger = accountAccess.retrieveLedger()
-        ledger.addEntry(LedgerEntry(amount, from, to))
+        ledger.addEntry(LedgerEntry(amount, from.iban, to.iban))
     }
 
     override fun externalTransfer(from: InternalAccount, to: ExternalAccount, amount: Int) {

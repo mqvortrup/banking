@@ -1,10 +1,10 @@
-package qm.banking.domain.singlepayments.implementation
+package qm.banking.singlepayments.implementation
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import qm.banking.domain.entities.*
-import qm.banking.domain.singlepayments.api.*
+import qm.banking.singlepayments.api.*
 import java.util.*
 
 internal class SinglePaymentsImplementationTest {
@@ -23,8 +23,8 @@ internal class SinglePaymentsImplementationTest {
         val to = InternalAccount(IBAN_to)
         singlePayments.internalTransfer(from, to, 500)
         Assertions.assertEquals(500, singlePayments.currentBalance(InternalAccount(IBAN_from)).amount)
-        Assertions.assertEquals(500, singlePayments.currentBalance(InternalAccount(IBAN_to)).amount)
-        println("bla bla")
+        Assertions.assertEquals(500, singlePayments.currentBalance(InternalAccount(IBAN_to)).amount
+        )
     }
 
     @Test
@@ -40,6 +40,8 @@ internal class SinglePaymentsImplementationTest {
         val to = ExternalAccount(IBAN_to_E)
         singlePayments.externalTransfer(from, to, 500)
         Assertions.assertEquals(500, singlePayments.currentBalance(InternalAccount(IBAN_from)).amount)
+        Assertions.assertEquals(500, singlePayments.currentBalance(InternalAccount(IBAN_to)).amount
+        )
     }
 
     @Test
@@ -49,7 +51,7 @@ internal class SinglePaymentsImplementationTest {
 
     @Test
     private fun currentBalance() {
-        Assertions.assertEquals( BALANCE, singlePayments.currentBalance(InternalAccount(IBAN_from)).amount
+        Assertions.assertEquals(BALANCE, singlePayments.currentBalance(InternalAccount(IBAN_from)).amount
         )
     }
 

@@ -1,7 +1,7 @@
-package qm.banking.domain.singlepayments.implementation
+package qm.banking.singlepayments.implementation
 
 import qm.banking.domain.entities.Account
-import qm.banking.domain.singlepayments.api.Balance
+import qm.banking.singlepayments.api.Balance
 import java.time.LocalDateTime
 
 object BalanceBuilder {
