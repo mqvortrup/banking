@@ -2,3 +2,5 @@
 /lib/
 /.idea/shelf/
 /out/
+/.gradle/
+/build/
